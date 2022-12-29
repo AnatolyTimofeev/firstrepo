@@ -4,6 +4,7 @@ str_y=''
 y = [['.','.','.'],
      ['.','.','.'],
      ['.','.','.']]
+
 def s():
     str_y = f"""   0 1 2 \n 0 {y[0][0]} {y[0][1]} {y[0][2]}\n 1 {y[1][0]} {y[1][1]} {y[1][2]}\n 2 {y[2][0]} {y[2][1]} {y[2][2]}"""
     print(str_y)
@@ -16,7 +17,9 @@ def win_(i):
              return True
 
 s()
-while '.' not in y:
+
+while True:
+
     q = input('Ваш ход. Введите координатy  x по горизонтали :  ')
     z = input('Введите координату x по вертикали : ')
     if not(q.isdigit()) or not (z.isdigit):
@@ -38,18 +41,21 @@ while '.' not in y:
         print('Вы победили !')
         s()
         break
-    while y[z][q] == 'x' or y[z][q] == '0' :
-        q = random.randrange(len(y))
-        z = random.randrange(len(y))
-      #  print(q,z)
-        if y[z][q] == '.':
-            y[z][q] = '0'
+    if '.' in sum(y,[]):
+        while y[z][q] == 'x' or y[z][q] == '0' :
+            q = random.randrange(len(y))
+            z = random.randrange(len(y))
+          #  print(q,z)
+            if y[z][q] == '.':
+                y[z][q] = '0'
 
-            print('Компьютер сходил')
-            s()
+                print('Компьютер сходил')
+                s()
+                break
+        if win_('0'):
+            print('Вы проиграли !')
+
             break
-    if win_('0'):
-        print('Вы проиграли !')
-                           
+    else:
+        print('У вас ничья !')
         break
-
